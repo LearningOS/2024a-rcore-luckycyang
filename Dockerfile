@@ -4,7 +4,7 @@
 # - ubuntu 18.04 -> 20.04
 # - qemu 5.0.0 -> 7.0.0
 # - Extensive comments linking to relevant documentation
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG QEMU_VERSION=7.0.0
 ARG HOME=/root
@@ -16,7 +16,8 @@ RUN apt-get update && \
         curl \
         git \
         python3 \
-        wget
+        wget \
+        xz-utils
 
 # 1. Set up QEMU RISC-V
 # - https://learningos.github.io/rust-based-os-comp2022/0setup-devel-env.html#qemu
@@ -35,7 +36,7 @@ RUN apt-get install -y \
         autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev \
         gawk build-essential bison flex texinfo gperf libtool patchutils bc \
         zlib1g-dev libexpat-dev git \
-        ninja-build pkg-config libglib2.0-dev libpixman-1-dev libsdl2-dev
+        ninja-build pkg-config libglib2.0-dev libpixman-1-dev libsdl2-dev libc6
 
 # 1.3. Build and install from source
 WORKDIR ${HOME}/qemu-${QEMU_VERSION}
